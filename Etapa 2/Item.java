@@ -36,7 +36,7 @@ class Medicina extends Item{
     }
 
     public void usar(Mascota pet){
-        System.out.println("Aplicando medicamento Jarabe" + this.getNombre() + "...");
+        System.out.println("Aplicando medicamento " + this.getNombre() + "...");
         pet.AumentarSalud(40);
     }
 }
