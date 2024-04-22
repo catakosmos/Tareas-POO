@@ -1,7 +1,7 @@
 
 public class Mascota {
     private String nombre;
-    private int edad;
+    private float edad;
     private int salud;
     private int energia;
     private int felicidad;
@@ -66,6 +66,35 @@ public class Mascota {
         if(energia>100){
             energia=100;
         }
+    }
+
+    public void Dormir(){
+        System.out.println(nombre + " ha dormido como un tronco");
+        this.AumentarEnergia(100);
+        this.AumentarFelicidad(15);
+        this.AumentarSalud(15);
+    }
+
+    public void PasarTiempo(){
+        if(edad<=5 && salud <=10){
+            felicidad-=20;
+            salud -=5;
+            energia -=5;
+
+        }else if(edad>5 && edad<=10 && salud<=50){
+            felicidad-=20;
+            salud -=5;
+            energia -=10;
+        }else if(edad>10 && salud <=50){
+            felicidad-=30;
+            salud -=5;
+            energia -=20;
+        }else{
+            felicidad-=5;
+            salud -=5;
+            energia -=5;
+        }
+        edad +=0.5;
     }
 
 }

@@ -27,7 +27,9 @@ public class Main {
         Pet.ActualizarEstado();
         Pet.PrintAtributo();
 
-
+        Pet.Dormir();
+        Pet.ActualizarEstado();
+        Pet.PrintAtributo();
 
     }
 }
