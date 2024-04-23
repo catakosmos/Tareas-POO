@@ -27,47 +27,52 @@ public class Inventario {
     }
     
     public void eliminarItemPorId(int ID) {        // elimina del inventario todos los ítems con el ID especificado
-        items.removeIf(item -> item.getID() == ID);
-    } 
+        Iterator<Item> iter = Inv.iterator();
+        while (iter.hasNext()) {
+            Item item = iter.next();
+            if (item.getID() == ID) {
+            iter.remove();                      // Eliminar el elemento usando el iterador
+        }
+    }
+}
+
 
     // Método para usar un ítem con una mascota
-    public boolean usarItemConMascota (int ID, Mascota mascota){
-        Item item = ObtenerItem(ID);
+    public boolean usarItemConMascota (Item item, Mascota Pet){
         if (item != null && item.getCantidad() > 0) {
             // usa el ítem basado en su tipo
             if (item instanceof Comida){
-                mascota.aumentarSalud(20);
-                mascota.aumentarEnergia(20);
+                Pet.AumentarSalud(20);
+                Pet.AumentarEnergia(20);
             }
             else if (item instanceof Medicina){
-                mascota.aumentarSalud(40);
+                Pet.AumentarSalud(40);
             }
             else if (item instanceof Juguete){
-                mascota.aumentarFelicidad(30);
+                Pet.AumentarFelicidad(30);
             }
             // disminuir cantidad del item
-            item.reducirCantidad(1);
+            item.reducirCantidad();
 
             // eliminar del inventario si la cantidad llega a 0
             if (item.getCantidad()==0){
-                eliminarItemPorId(ID);
+                Inv.remove(item);
             }
             return true; // el ítem se usó con éxito
         }
         return false; // no se puede utilizar el ítem
     }
         
-    /*
+    
     public void Usaritem(Item item, Mascota Pet){
         if(item == null){
             System.out.println("No queda este item");
-        }else{
+        }
+        else {
             item.usar(Pet);
             if(item.getCantidad()==0){
                 Inv.remove(item);
             }
         }
     }
-    */
-
 }
