@@ -9,12 +9,20 @@ public abstract class Item {
         this.Cantidad = cantidad;
     }
 
-    public String getNombre() {
-        return nombre;
+    public Item(int cantidadInicial) {
+        this.Cantidad = cantidadInicial;
     }
 
     public int getCantidad() {
-        return Cantidad;
+        return this.Cantidad;
+    }
+
+    public void setCantidad(int cantidad) {
+        this.Cantidad = cantidad;
+    }
+
+    public String getNombre() {
+        return nombre;
     }
 
     public int getID(){
