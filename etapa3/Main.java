@@ -44,7 +44,7 @@ public class Main {
             System.out.println("Mascota Virtual");
             Pet.PrintAtributo();
             Inv.mostrarInventario();
-            
+
             System.out.println("Seleccione un elemento del inventario (0 para dormir, x para salir): ");
             String opcion = inputScanner.nextLine();
 
@@ -66,7 +66,7 @@ public class Main {
 
             }
             else {
-                Item item = Inv.ObtenerItem(indice - 1); // Usar el índice correcto
+                Item item = Inv.ObtenerItem(indice); // Usar el índice correcto
                 if (item == null) {
                     System.out.println("El ítem seleccionado no existe o no tiene más cantidad.");
                 }
