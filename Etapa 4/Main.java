@@ -10,22 +10,41 @@ public class Main {
             System.out.println("Por favor, proporciona un archivo CSV como argumento.");
             return;
         }
+        String archivoCSV = args[0];
+        Mascota mascota = null;
+        Inventario inventario = new Inventario();
+        
+        try {Scanner scanner = new Scanner(new File(archivoCSV))){
+            boolean primeraLinea = true;
 
-        Scanner scanner = null;
-        try {
-            scanner = new Scanner(new File(args[0]));
-            // Procesar líneas del archivo CSV
             while (scanner.hasNextLine()) {
                 String linea = scanner.nextLine();
-                System.out.println("Línea: " + linea);
-                // Procesar la línea del archivo CSV...
+                String[] partes = linea.split(","); // Asumimos que el CSV usa comas como separador
+
+                if (primeraLinea) {
+                    // La primera línea define el nombre de la mascota
+                    mascota = new Mascota(partes[0].trim());
+                    primeraLinea = false;
+                } else {
+                    // Otras líneas representan los elementos del inventario
+                    String tipo = partes[0].trim();
+                    String nombre = partes[1].trim();
+                    int cantidad = Integer.parseInt(partes[2].trim());
+                    int id = Integer.parseInt(partes[3].trim());
+
+                    // Crear el objeto adecuado y agregar al inventario
+                    if (tipo.equalsIgnoreCase("comida")) {
+                        inventario.agregarItem(new Comida(nombre, cantidad, id));
+                    } else if (tipo.equalsIgnoreCase("medicina")) {
+                        inventario.agregarItem(new Medicina(nombre, cantidad, id));
+                    } else if (tipo.equalsIgnoreCase("juguete")) {
+                        inventario.agregarItem(new Juguete(nombre, cantidad, id));
+                    }
+                }
             }
         } catch (FileNotFoundException e) {
-            System.out.println("Archivo no encontrado");
-        } finally {
-            if (scanner != null) {
-                scanner.close(); // Cerrar el scanner manualmente
-            }
+            System.out.println("Archivo no encontrado: " + archivoCSV);
+            return;
         }
 
         Mascota Pet=new Mascota("Garfield");
